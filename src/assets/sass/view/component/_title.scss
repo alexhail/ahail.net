@@ -20,7 +20,7 @@
 
   .title {
     position: relative;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.65);
     opacity: 0;
     animation: fade-in-title;
     animation-duration: 0.75s;
@@ -50,12 +50,12 @@
       transform: translate(-50%, -50%);
       opacity: 0.25;
 
-      $translation_interval: 1.25%;
-      $translation_start: 2%;
+      $translation_interval: 2px;
+      $translation_start: 4px;
       $translation_distance_25: $translation_start + $translation_interval;
       $translation_distance_50: $translation_start + $translation_interval*2;
       $translation_distance_75: $translation_start + $translation_interval;
-      $translation_distance_100: 1%;
+      $translation_distance_100: 2px;
       $translation_distance_final: $translation_start;
       $translation_opacity: 0.05;
       animation-duration: 15s;
@@ -66,100 +66,100 @@
 
       &.blue {
         color: rgba(0,0,255,1);
-        transform: translate(-50% - $translation_start, -50% - $translation_start);
+        transform: translate(calc(-50% - $translation_start), calc(-50% - $translation_start));
         animation-name: shimmer-blue;
       }
 
       &.red {
         color: rgba(255,0,0,1);
-        transform: translate(-50% + $translation_start, -50% - $translation_start);
+        transform: translate(calc(-50% + $translation_start), calc(-50% - $translation_start));
         animation-name: shimmer-red;
       }
 
       &.green {
         color: rgba(0,255,0,1);
-        transform: translate(-50%, -50% + $translation_start);
+        transform: translate(-50%, calc(-50% + $translation_start));
         animation-name: shimmer-green;
       }
 
       @keyframes shimmer-blue {
         0% {
-          transform: translate(-50% - $translation_start, -50% - $translation_start);
+          transform: translate(calc(-50% - $translation_start), calc(-50% - $translation_start));
           opacity: 0.25;
         }
         20% {
-          transform: translate(-50% - $translation_start, -50% - $translation_start);
+          transform: translate(calc(-50% - $translation_start), calc(-50% - $translation_start));
         }
         30% {
-          transform: translate(-50% - $translation_distance_50, -50% - $translation_distance_50);
+          transform: translate(calc(-50% - $translation_distance_50), calc(-50% - $translation_distance_50));
           opacity: $translation_opacity;
         }
         80% {
-          transform: translate(-50% - $translation_distance_50, -50% - $translation_distance_50);
+          transform: translate(calc(-50% - $translation_distance_50), calc(-50% - $translation_distance_50));
         }
         88% {
-          transform: translate(-50% - $translation_distance_100, -50% - $translation_distance_100);
+          transform: translate(calc(-50% - $translation_distance_100), calc(-50% - $translation_distance_100));
           opacity: 0.25;
         }
         95% {
-          transform: translate(-50% - $translation_distance_100, -50% - $translation_distance_100);
+          transform: translate(calc(-50% - $translation_distance_100), calc(-50% - $translation_distance_100));
         }
         100% {
-          transform: translate(-50% - $translation_distance_final, -50% - $translation_distance_final);
+          transform: translate(calc(-50% - $translation_distance_final), calc(-50% - $translation_distance_final));
         }
       }
 
       @keyframes shimmer-red {
         0% {
-          transform: translate(-50% + $translation_start, -50% - $translation_start);
+          transform: translate(calc(-50% + $translation_start), calc(-50% - $translation_start));
           opacity: 0.25;
         }
         20% {
-          transform: translate(-50% + $translation_start, -50% - $translation_start);
+          transform: translate(calc(-50% + $translation_start), calc(-50% - $translation_start));
         }
         30% {
-          transform: translate(-50% + $translation_distance_50, -50% - $translation_distance_50);
+          transform: translate(calc(-50% + $translation_distance_50), calc(-50% - $translation_distance_50));
           opacity: $translation_opacity;
         }
         80% {
-          transform: translate(-50% + $translation_distance_50, -50% - $translation_distance_50);
+          transform: translate(calc(-50% + $translation_distance_50), calc(-50% - $translation_distance_50));
         }
         88% {
-          transform: translate(-50% + $translation_distance_100, -50% - $translation_distance_100);
+          transform: translate(calc(-50% + $translation_distance_100), calc(-50% - $translation_distance_100));
           opacity: 0.25;
         }
         95% {
-          transform: translate(-50% + $translation_distance_100, -50% - $translation_distance_100);
+          transform: translate(calc(-50% + $translation_distance_100), calc(-50% - $translation_distance_100));
         }
         100% {
-          transform: translate(-50% + $translation_distance_final, -50% - $translation_distance_final);
+          transform: translate(calc(-50% + $translation_distance_final), calc(-50% - $translation_distance_final));
         }
       }
 
       @keyframes shimmer-green {
         0% {
-          transform: translate(-50%, -50% + $translation_start);
+          transform: translate(-50%, calc(-50% + $translation_start));
           opacity: 0.25;
         }
         20% {
-          transform: translate(-50%, -50% + $translation_start);
+          transform: translate(-50%, calc(-50% + $translation_start));
         }
         30% {
-          transform: translate(-50%, -50% + $translation_distance_50);
+          transform: translate(-50%, calc(-50% + $translation_distance_50));
           opacity: $translation_opacity;
         }
         80% {
-          transform: translate(-50%, -50% + $translation_distance_50);
+          transform: translate(-50%, calc(-50% + $translation_distance_50));
         }
         88% {
-          transform: translate(-50%, -50% + $translation_distance_100);
+          transform: translate(-50%, calc(-50% + $translation_distance_100));
           opacity: 0.25;
         }
         95% {
-          transform: translate(-50%, -50% + $translation_distance_100);
+          transform: translate(-50%, calc(-50% + $translation_distance_100));
         }
         100% {
-          transform: translate(-50%, -50% + $translation_distance_final);
+          transform: translate(-50%, calc(-50% + $translation_distance_final));
         }
       }
     }

@@ -1,7 +1,6 @@
 <template>
   <div class="title-container">
-    <div class="title">
-      ahail
+    <div class="title">ahail
       <div class="title-backdrop blue">ahail</div>
       <div class="title-backdrop red">ahail</div>
       <div class="title-backdrop green">ahail</div>
