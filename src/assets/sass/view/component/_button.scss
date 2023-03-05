@@ -1,0 +1,221 @@
+button, .button {
+  display: inline-block;
+  width: auto;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background: color("theme-color-secondary");
+  box-sizing: border-box;
+  color: color("white");
+  cursor: pointer;
+
+  &:hover {
+    background: color("theme-color-primary", $lightness: -5%);
+  }
+
+  &.forgot-password {
+    padding: 8px 15px;
+    float: right;
+    font-weight: bold;
+  }
+
+  &.navigation-logout {
+    float: right;
+  }
+
+  &.button-danger {
+    color: color("white");
+    background-color: color("red");
+
+    &:hover {
+      background-color: color("red", $lightness: -5%);
+    }
+  }
+
+  &.large {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+
+  &.medium {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+
+  &.rounded {
+    border-radius: 10px;
+
+    &.rounded-sharp {
+      border-radius: 5px;
+    }
+  }
+
+  &.outlined {
+    border: 4px solid rgba(0,0,0,0.15);
+    box-sizing: border-box;
+
+    &.outline-small {
+      border-width: 2px;
+    }
+  }
+
+  &.table-action {
+    padding: 0px 4px;
+    margin-right: 5px;
+    color: color("white");
+    background: color("black");
+
+    i.las, i.lar {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  &.make-admin {
+    color: color("gold");
+  }
+
+  &.remove-admin {
+    color: color("gold");
+    background-image: linear-gradient(315deg, transparent 0%, transparent 47%, color("red") 48%, color("red") 53%, transparent 54%, transparent 100%),
+                      linear-gradient(45deg, transparent 0%, transparent 47%, color("red") 48%, color("red") 53%, transparent 54%, transparent 100%),
+                      linear-gradient(to right, color("black", $lightness: +15%), color("black", $lightness: +15%));
+  }
+
+  &.black {
+    background-color: color("black");
+
+    &:hover {
+      background-color: color("black", $lightness: -5%);
+    }
+  }
+
+  &.white {
+    background-color: color("white");
+
+    &:hover {
+      background-color: color("white", $lightness: -5%);
+    }
+  }
+
+  &.red {
+    background-color: color("red");
+
+    &:hover {
+      background-color: color("red", $lightness: -5%);
+    }
+  }
+
+  &.green {
+    background-color: color("green");
+
+    &:hover {
+      background-color: color("green", $lightness: -5%);
+    }
+  }
+
+  &.blue {
+    background-color: color("blue");
+
+    &:hover {
+      background-color: color("blue", $lightness: -5%);
+    }
+  }
+
+  &.orange {
+    background-color: color("orange");
+
+    &:hover {
+      background-color: color("orange", $lightness: -5%);
+    }
+  }
+
+  &.yellow {
+    background-color: color("yellow");
+
+    &:hover {
+      background-color: color("yellow", $lightness: -5%);
+    }
+  }
+
+  &.gold {
+    background-color: color("gold");
+
+    &:hover {
+      background-color: color("gold", $lightness: -5%);
+    }
+  }
+
+  &.purple {
+    background-color: color("purple");
+
+    &:hover {
+      background-color: color("purple", $lightness: -5%);
+    }
+  }
+
+  &.gray {
+    background-color: color("gray");
+
+    &:hover {
+      background-color: color("gray", $lightness: -5%);
+    }
+  }
+
+  // These are default but class is provided to override
+  &.theme-color-primary {
+    background-color: color("theme-color-primary");
+
+    &:hover {
+      background-color: color("theme-color-primary", $lightness: -5%);
+    }
+  }
+
+  &.theme-color-secondary {
+    background-color: color("theme-color-secondary");
+
+    &:hover {
+      background-color: color("theme-color-secondary", $lightness: -5%);
+    }
+  }
+
+  &.font-color-primary {
+    background-color: color("font-color-primary");
+
+    &:hover {
+      background-color: color("font-color-primary", $lightness: -5%);
+    }
+  }
+
+  &.font-color-secondary {
+    background-color: color("font-color-secondary");
+
+    &:hover {
+      background-color: color("font-color-secondary", $lightness: -5%);
+    }
+  }
+
+  &.background-color-primary {
+    background-color: color("background-color-primary");
+
+    &:hover {
+      background-color: color("background-color-primary", $lightness: -5%);
+    }
+  }
+
+  &.background-color-secondary {
+    background-color: color("background-color-secondary");
+
+    &:hover {
+      background-color: color("background-color-secondary", $lightness: -5%);
+    }
+  }
+
+  &.background-color-tertiary {
+    background-color: color("background-color-tertiary");
+
+    &:hover {
+      background-color: color("background-color-tertiary", $lightness: -5%);
+    }
+  }
+}

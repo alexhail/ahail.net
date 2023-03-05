@@ -1,0 +1,59 @@
+@import "theme/color";
+@import "theme/theme";
+@import "view/layout/view";
+@import "view/component/background";
+@import "view/component/navigation";
+@import "view/component/button";
+@import "view/page/resume";
+@import "view/page/portfolio";
+@import "view/page/home";
+@import "../Roboto/roboto";
+@import "./normalize.css";
+@import "./inline.scss";
+
+html {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  body, body #content {
+    height: 100%;
+    color: color("font-color-primary");
+    overflow: hidden;
+  }
+
+  body {
+    position: relative;
+    display: block;
+    height: 100%;
+    font-family: var(--font-family);
+    font-weight: 500;
+    -webkit-font-smoothing: "antialiased";
+    -moz-osx-font-smoothing: "grayscale";
+
+    main#content {
+      display: flex;
+      flex-flow: column nowrap;
+      background: radial-gradient(circle, color("black", $lightness: -2%) 0%, color("black", $lightness: -8%) 100%);
+      overflow: hidden;
+
+      #view[view] {
+        padding: 30px;
+        position: relative;
+        min-height: 100vh;
+        z-index: 1;
+        overflow: hidden;
+
+        p {
+          font-weight: 400;
+        }
+
+        .async-component-load-fail {
+          padding: 0 10px;
+        }
+      }
+    }
+  }
+}
+
+@import "view/mobile/mobile";

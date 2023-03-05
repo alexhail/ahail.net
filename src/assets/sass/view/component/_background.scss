@@ -1,0 +1,121 @@
+@use 'sass:math';
+
+main#content {
+  .background-animation {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+
+    @mixin particle($color, $index) {
+      div.particle:nth-of-type(#{$index}) {
+        $size: 8px;
+        $duration: (math.random(50) + 25) * 1s;
+        $x_start: -10%;
+        $y_start: math.random(105) * 1%;
+        $x_end: 110%;
+        $y_end: (math.random(85) * 1%) + 5%;
+        $waypoints: math.random(10) + 10;
+        $path_curvature: (math.random(6) + 5) * 1%;
+        $shadow_empty: 4px;
+        $shadow_full: 60px;
+        $shadow_density: 0.25; 
+        $shadow_duration: 2s;
+        $shadow_duration_percentage: calc((($shadow_duration / $duration) * 100%) / 2);
+        $shadow_blink_count: round(calc(($duration / $shadow_duration)));
+        $start_color: $color;
+
+        @keyframes movement {
+          0% {
+            top: $y_start;
+            left: $x_start;
+            color: color($start_color, $hue: 0deg);
+            background: color($start_color, $hue: 0deg);
+            //box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+          }
+          50% {
+            color: color($start_color, $hue: 120deg);
+            background: color($start_color, $hue: 120deg);
+          }
+          100% {
+            top: $y_end;
+            left: $x_end;
+            color: color($start_color, $hue: 240deg);
+            background: color($start_color, $hue: 240deg);
+            //box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+          }
+          @for $i from 1 to $waypoints {
+            $x: math.random(2);
+            $direction: if($x == 2, 1, -1);
+            $percentage: 0% + ($i * calc(100% / $waypoints));
+            $delta_x: 35%;
+            $delta_y: 25%;
+            $delta_const_x: if(($percentage - ($delta_x * $direction) > 0%) and ($percentage + ($delta_x * $direction) < 100%), $delta_x * $direction, 1%);
+            $delta_const_y: if(($percentage - ($delta_y * $direction) > 0%) and ($percentage + ($delta_y * $direction) < 100%), $delta_y * $direction, 1%);
+            $x: calc(0% + ($i * calc($x_end / $waypoints))) + calc($delta_const_x * $direction);
+            $y: calc(0% + ($i * calc($y_end / $waypoints))) + calc($delta_const_y * $direction);
+
+            @if $x == 2 {
+              #{$percentage} {
+                top: $y;
+              }
+              
+              #{calc($percentage + $path_curvature)} {
+                left: $x;
+              }
+            } @else {
+              #{$percentage} {
+                left: $x;
+              }
+              
+              #{calc($percentage + $path_curvature)} {
+                top: $y;
+              }
+            }
+          }
+
+          @for $i from 1 to $shadow_blink_count {
+            $percentage: 0% + ($i * calc(100% / $shadow_blink_count));
+            $shadow_start_percentage: if(calc($percentage + $shadow_duration_percentage) > 0%, calc($percentage + $shadow_duration_percentage), 1%);
+            $shadow_end_percentage: if(calc($percentage - $shadow_duration_percentage) > 0%, calc($percentage - $shadow_duration_percentage), 1%);
+
+            #{$shadow_start_percentage} {
+              box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+            }
+
+            #{$percentage} {
+                box-shadow: 0 0 $shadow_full calc($shadow_full * $shadow_density);
+            }
+
+            #{$shadow_end_percentage} {
+              box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+            }
+
+          }
+        }
+
+        position: absolute;
+        display: block;
+        width: $size;
+        height: $size;
+        border-radius: 100%;
+        background: blue;
+        top: $y_start;
+        left: $x_start;
+        border: 2px solid rgba(0,0,0,0.25);
+        box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+        transform: translate(-50%, -50%);
+        animation: movement $duration ease-in-out infinite forwards alternate;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+
+    @for $particle from 1 to 100 {
+      @include particle("purple", $particle);
+    }
+  }
+}

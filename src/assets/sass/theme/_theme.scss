@@ -1,0 +1,51 @@
+/*
+*
+*  file: dark.scss
+*  created: 1/31/2023
+*  author: Alex Hail
+*  description: The dark color scheme and variable settings for the CDX Charts Website.
+*
+*/
+
+// Default Colors
+// These will be re-arranged depending on the theme
+// Theme variables are set within the :root element
+$black: #222222;
+$white: #fefefe;
+$red: red;
+$green: green;
+$blue: blue;
+$orange: orange;
+$yellow: yellow;
+$gold: gold;
+$purple: purple;
+$gray: #b0b0b0;
+
+// Default Styles
+$font-family: "Roboto", sans-serif;
+
+:root {
+  --font-family: #{$font-family};
+
+  &, &[theme], &[theme="default"] {
+    @include define-color("black",  $black);
+    @include define-color("white",  $white);
+    @include define-color("red",    $red);
+    @include define-color("green",  $green);
+    @include define-color("blue",   $blue);
+    @include define-color("orange", $orange);
+    @include define-color("yellow", $yellow);
+    @include define-color("gold",   $gold);
+    @include define-color("purple", $purple);
+    @include define-color("gray",   $gray);
+    @include define-color("font-color-primary",         $white);
+    @include define-color("font-color-secondary",       darken($white, 15%));
+    @include define-color("font-color-tertiary",        darken($white, 25%));
+    @include define-color("theme-color-primary",        lighten($black, +5%));
+    @include define-color("theme-color-secondary",      lighten($black, +3%));
+    @include define-color("theme-color-tertiary",       lighten($black, +1%));
+    @include define-color("background-color-primary",   $black);
+    @include define-color("background-color-secondary", lighten($black, 3%));
+    @include define-color("background-color-tertiary",  lighten($black, 9%));
+  }
+}

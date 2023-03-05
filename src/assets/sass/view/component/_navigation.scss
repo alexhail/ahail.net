@@ -1,0 +1,146 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  margin: 60px auto 0 auto;
+  animation: appear;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  opacity: 0;
+
+  .button {
+    margin: 0 10px;
+  }
+
+  .home-construction-notice {
+    text-align: center;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    color: #7d7d7d;
+    letter-spacing: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+
+    p:first-of-type {
+      margin-bottom: 60px;
+    }
+
+    .portfolio-link {
+      &.resume {
+        margin-top: 45px;
+      }
+
+      a {
+        color: #7d7d7d;
+        font-weight: bold;
+        background: #1c1c1c;
+        padding: 5px 10px;
+        border-radius: 4px;
+
+        &:hover {
+          background: lighten(#1c1c1c, 10%);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .home-menu-items {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 1280px;
+    justify-content: center;
+    margin: 0 auto;
+    overflow-y: hidden;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      .home-menu-item {
+        border-color: rgba(0,0,0,0) !important;
+      }
+    }
+
+    .home-menu-item {
+      display: flex;
+      flex: 1;
+      font-family: "Raleway", sans-serif;
+      font-size: 16px;
+      min-width: 250px;
+      background: rgba(0,0,0,0);
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.25);
+      padding: 15px 30px;
+      cursor: pointer;
+      transition: all .25s ease-out;
+
+      &.selected {
+        background: rgb(26, 26, 26);
+        color: white;
+
+        &:hover {
+          background: rgb(26, 26, 26);
+        }
+      }
+
+      &:hover {
+        background: rgba(0,0,0,0.25);
+        color: #fefefe;
+      }
+    }
+  }
+
+  .home-menu-content {
+    display: block;
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: max-height 0.5s linear;
+
+    &.open {
+      max-height: 500px;
+    }
+
+    .home-menu-item-content {
+      position: relative;
+      display: none;
+      max-width: 1280px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      padding: 60px 30px 30px 30px;
+
+      &.open {
+        display: block;
+      }
+
+      .home-menu-item-content-close {
+        position: absolute;
+        font-size: 12px;
+        top: 0;
+        right: 0;
+        width: 20px;
+        padding-top: 3px;
+        text-align: center;
+
+        &:hover {
+          cursor: pointer;
+          background: #373737;
+        }
+      }
+    }
+  }
+}

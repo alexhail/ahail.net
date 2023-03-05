@@ -1,0 +1,24 @@
+[view="resume"]{
+  .resume-download-links {
+    text-align: center;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    color: #7d7d7d;
+    letter-spacing: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 180px 0;
+
+    p.resume-light {
+      a:first-of-type {
+        margin-left: calc(68px + 15px);
+      }
+    }
+
+    p.resume-dark{
+      a:first-of-type {
+        margin-left: 15px;
+      }
+    }
+  }
+}
