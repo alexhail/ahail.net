@@ -7,18 +7,9 @@
     letter-spacing: 2px;
     max-width: 900px;
     margin: 0 auto;
-    padding: 180px 0;
 
-    p.resume-light {
-      a:first-of-type {
-        margin-left: calc(68px + 15px);
-      }
-    }
-
-    p.resume-dark{
-      a:first-of-type {
-        margin-left: 15px;
-      }
+    a:not(.no) {
+      text-decoration: underline;
     }
   }
 }

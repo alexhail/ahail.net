@@ -1,0 +1,3 @@
+[ ] Test and fix title AND background animation in chrome/other browsers like safari
+[ ] Figure out a way to ensure that the title animation only happens once, maybe track in router or something
+[ ] Add a "music" page that describes me as a artist

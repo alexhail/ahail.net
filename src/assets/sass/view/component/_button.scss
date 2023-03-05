@@ -1,27 +1,43 @@
+$red: #f00;
+$orange: #ff9c1c;
+$yellow: yellow;
+$green: #00ff64;
+$blue: #007cff;
+$purple: #9b0aff;
+
+$synth_bg: rgb(18, 18, 18);
+$synth_gradient_border_size: 1px;
+$synth_width: 128px;
+$synth_height: 45px;
+$synth_size_ratio: $synth_width / $synth_height;
+$synth_container_width: $synth_width + ($synth_gradient_border_size*2);
+$synth_container_height: $synth_height + ($synth_gradient_border_size*2);
+$synth_gradient_size: 45px;
+$synth_blip_size: 2%;
+$synth_blip_hardness: 5%;
+$synth_gradient: linear-gradient(to left, $red, $orange, $yellow, $green, $blue, purple, $red);
+$synth_gradient_shadow: linear-gradient(to bottom, $red, $orange);
+$synth_gradient_blip: linear-gradient(180deg,
+                                      transparent 0%,
+                                      transparent calc(50% - $synth_blip_size - $synth_blip_hardness),
+                                      white calc(50% - $synth_blip_size),
+                                      white 50%,
+                                      white calc(50% + $synth_blip_size),
+                                      transparent calc(50% + $synth_blip_size + $synth_blip_hardness),
+                                      transparent 100%);
+$synth_gradient_inset_box_shadow_min: inset 0 0 750px 750px #0a0a0a;
+$synth_gradient_inset_box_shadow_max: inset 0 0 550px 550px #0a0a0a;
+$synth_gradient_shadow_container_size: calc($synth_width + ($synth_gradient_size * 4));
+
+$synth_gradient_animation_duration: 10s;
+$synth_gradient_shadow_rotation_duration: $synth_gradient_animation_duration * 2;
+
 button, .button {
+  position: relative;
   display: inline-block;
-  width: auto;
-  padding: 5px 10px;
-  font-size: 14px;
-  font-weight: 500;
-  background: color("theme-color-secondary");
-  box-sizing: border-box;
-  color: color("white");
+  width: $synth_container_width;
+  height: $synth_container_height;
   cursor: pointer;
-
-  &:hover {
-    background: color("theme-color-primary", $lightness: -5%);
-  }
-
-  &.forgot-password {
-    padding: 8px 15px;
-    float: right;
-    font-weight: bold;
-  }
-
-  &.navigation-logout {
-    float: right;
-  }
 
   &.button-danger {
     color: color("white");
@@ -57,29 +73,6 @@ button, .button {
     &.outline-small {
       border-width: 2px;
     }
-  }
-
-  &.table-action {
-    padding: 0px 4px;
-    margin-right: 5px;
-    color: color("white");
-    background: color("black");
-
-    i.las, i.lar {
-      user-select: none;
-      pointer-events: none;
-    }
-  }
-
-  &.make-admin {
-    color: color("gold");
-  }
-
-  &.remove-admin {
-    color: color("gold");
-    background-image: linear-gradient(315deg, transparent 0%, transparent 47%, color("red") 48%, color("red") 53%, transparent 54%, transparent 100%),
-                      linear-gradient(45deg, transparent 0%, transparent 47%, color("red") 48%, color("red") 53%, transparent 54%, transparent 100%),
-                      linear-gradient(to right, color("black", $lightness: +15%), color("black", $lightness: +15%));
   }
 
   &.black {
@@ -216,6 +209,106 @@ button, .button {
 
     &:hover {
       background-color: color("background-color-tertiary", $lightness: -5%);
+    }
+  }
+
+  .button-container {
+    position: absolute;
+    display: block;
+    width: $synth_container_width;
+    height: $synth_container_height;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1;
+
+    .button-content {
+      position: absolute;
+      display: flex;
+      font-size: 14px;
+      padding: 10px 35px;
+      top: $synth_gradient_border_size;
+      left: $synth_gradient_border_size;
+      width: $synth_width;
+      height: $synth_height;
+      background: rgba(0, 0, 0, 1);
+      color: color("font-color-primary");
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      cursor: pointer;
+    
+      &:hover {
+        transition: box-shadow 0.35s ease-out;
+        //background: rgba(0, 0, 0, 1);
+        box-shadow: 0px 0px 8px 8px rgba(255,255,255,0.25);
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 50%;
+      width: calc($synth_container_width + 80px);
+      height: calc($synth_container_width + 80px);
+      transform-origin: center center;
+      transform: translate(-50%, -50%);
+      //background: $synth_gradient;
+      animation: rotate $synth_gradient_animation_duration linear infinite normal forwards;
+      z-index: -2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 50%;
+      width: calc($synth_container_width + 80px);
+      height: calc($synth_container_width + 80px);
+      transform-origin: center left;
+      transform: translate(0%, -50%);
+      background: $synth_gradient_blip;
+      animation: rotate_blip $synth_gradient_animation_duration linear normal both infinite,
+                      appear_blip 5s ease-in-out alternate both infinite;
+      animation-delay: 1s, 12s;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    
+  }
+
+  @for $i from 1 through 10 {
+    &:nth-of-type(#{$i}) .button-container {
+      &::after, &::before {
+        animation-delay: calc(1 + ($i*0.6)) * 1s, 1s;
+        animation-direction: if($i % 2 == 0, reverse, normal), alternate !important;
+      }
+    }
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+  }
+
+  @keyframes rotate_blip {
+    100% {
+      transform: translate(0%, -50%) rotateZ(360deg);
+    }
+  }
+
+  @keyframes appear_blip {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

@@ -4,10 +4,10 @@
       <p>Thank you for your interest in my work.</p>
       <p>Below you can download my resume(s) in PDF format, in either light or dark mode.</p>
       <br>
-      <p class="resume-light">Resume <a href="/resumes/AlexHail_Resume_Tech_2023.pdf">View</a></p>
-      <p class="resume-dark">Resume (Dark) <a href="/resumes/AlexHail_Resume_Tech_2023_Dark.pdf">View</a></p>
+      <p class="resume-light"><a href="/resumes/AlexHail_Resume_Tech_2023.pdf" target="_blank">View Resume</a></p>
+      <p class="resume-dark"><a href="/resumes/AlexHail_Resume_Tech_2023_Dark.pdf" target="_blank">View Resume (Dark) </a></p>
       <br>
-      <p><RouterLink :to="{ name: 'home' }">&larr; Go Back</RouterLink></p>
+      <p><RouterLink class='no' :to="{ name: 'home' }">&larr; Go Back</RouterLink></p>
     </div>
   </div>
 </template>

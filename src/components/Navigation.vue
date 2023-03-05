@@ -1,11 +1,6 @@
 <template>
   <nav>
-    <RouterLink :to="{ name: 'home' }" class="button">Home</RouterLink>
-    <RouterLink :to="{ name: 'resume' }" class="button">Resume</RouterLink>
-    <RouterLink :to="{ name: 'portfolio' }" class="button">Portfolio</RouterLink>
+    <Button to="resume" router>Resume</Button>
+    <Button to="portfolio" router>Portfolio</Button>
   </nav>
 </template>
-
-<script lang="ts" setup>
-  import { RouterLink, RouterView } from 'vue-router'
-</script>

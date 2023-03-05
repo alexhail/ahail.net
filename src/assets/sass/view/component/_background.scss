@@ -2,57 +2,80 @@
 
 main#content {
   .background-animation {
+    $rotations: 20;
+    $rotation_speed: 60s;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 50%;
+    left: 50%;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    height: 100vw;
+    overflow: visible;
     z-index: 0;
+    animation: background-morph calc($rotation_speed * $rotations) linear infinite alternate forwards;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
+
+    @keyframes background-morph {
+      50% {
+        transform: translate(-50%, -50%) scale(0.4) rotateZ(calc(360deg * ($rotations/2)));
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotateZ(calc(360deg * $rotations));
+      }
+    }
 
     @mixin particle($color, $index) {
       div.particle:nth-of-type(#{$index}) {
-        $size: 8px;
-        $duration: (math.random(50) + 25) * 1s;
-        $x_start: -10%;
-        $y_start: math.random(105) * 1%;
-        $x_end: 110%;
-        $y_end: (math.random(85) * 1%) + 5%;
-        $waypoints: math.random(10) + 10;
+        $size: 3px;
+        $duration: (math.random(180) + 80) * 1s;
+        $delay: (math.random(30) + 5) * 1s;
+        $x_start: (math.random(90) + 5) * 1%;
+        $y_start: (math.random(90) + 5) * 1%;
+        $x_end: math.random(105) * 1%;
+        $y_end: math.random(105) * 1%;
+        $waypoints: math.random(18) + 8;
+        $waypoint_distance_max_delta: 75;
+        $waypoint_distance_min_delta: 25;
         $path_curvature: (math.random(6) + 5) * 1%;
-        $shadow_empty: 4px;
-        $shadow_full: 60px;
+        $shadow_empty: (math.random(2) + 2) * 1px;
+        $shadow_full: (math.random(15) + 45) * 1px;
         $shadow_density: 0.25; 
-        $shadow_duration: 2s;
+        $shadow_duration: (math.random(3) + 1) * 1s;
         $shadow_duration_percentage: calc((($shadow_duration / $duration) * 100%) / 2);
         $shadow_blink_count: round(calc(($duration / $shadow_duration)));
         $start_color: $color;
 
-        @keyframes movement {
+        @keyframes movement_#{$index} {
           0% {
             top: $y_start;
             left: $x_start;
-            color: color($start_color, $hue: 0deg);
-            background: color($start_color, $hue: 0deg);
-            //box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+          }
+          2% {
+            color: color($start_color, $hue: 0deg, $saturation: +5%);
+            background: color($start_color, $hue: 0deg, $saturation: +5%);
+            box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+            width: $size;
+            height: $size;
           }
           50% {
-            color: color($start_color, $hue: 120deg);
-            background: color($start_color, $hue: 120deg);
+            color: color($start_color, $hue: 180deg, $saturation: +35%, $lightness: +25%);
+            background: color($start_color, $hue: 180deg, $saturation: +35%, $lightness: +25%);
           }
           100% {
             top: $y_end;
             left: $x_end;
-            color: color($start_color, $hue: 240deg);
-            background: color($start_color, $hue: 240deg);
-            //box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+            color: color($start_color, $hue: 360deg, $saturation: +5%);
+            background: color($start_color, $hue: 360deg, $saturation: +5%);
+            box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+            width: $size;
+            height: $size;
           }
-          @for $i from 1 to $waypoints {
+          @for $i from 1 through $waypoints {
             $x: math.random(2);
             $direction: if($x == 2, 1, -1);
             $percentage: 0% + ($i * calc(100% / $waypoints));
-            $delta_x: 35%;
-            $delta_y: 25%;
+            $delta_x: (math.random($waypoint_distance_max_delta) + $waypoint_distance_min_delta) * 1%;
+            $delta_y: (math.random($waypoint_distance_max_delta) + $waypoint_distance_min_delta) * 1%;
             $delta_const_x: if(($percentage - ($delta_x * $direction) > 0%) and ($percentage + ($delta_x * $direction) < 100%), $delta_x * $direction, 1%);
             $delta_const_y: if(($percentage - ($delta_y * $direction) > 0%) and ($percentage + ($delta_y * $direction) < 100%), $delta_y * $direction, 1%);
             $x: calc(0% + ($i * calc($x_end / $waypoints))) + calc($delta_const_x * $direction);
@@ -77,17 +100,17 @@ main#content {
             }
           }
 
-          @for $i from 1 to $shadow_blink_count {
+          @for $i from 1 through $shadow_blink_count {
             $percentage: 0% + ($i * calc(100% / $shadow_blink_count));
             $shadow_start_percentage: if(calc($percentage + $shadow_duration_percentage) > 0%, calc($percentage + $shadow_duration_percentage), 1%);
             $shadow_end_percentage: if(calc($percentage - $shadow_duration_percentage) > 0%, calc($percentage - $shadow_duration_percentage), 1%);
-
+            
             #{$shadow_start_percentage} {
               box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
             }
 
             #{$percentage} {
-                box-shadow: 0 0 $shadow_full calc($shadow_full * $shadow_density);
+              box-shadow: 0 0 $shadow_full calc($shadow_full * $shadow_density);
             }
 
             #{$shadow_end_percentage} {
@@ -99,23 +122,36 @@ main#content {
 
         position: absolute;
         display: block;
-        width: $size;
-        height: $size;
+        width: 0px;
+        height: 0px;
         border-radius: 100%;
-        background: blue;
+        background: transparent;
         top: $y_start;
         left: $x_start;
-        border: 2px solid rgba(0,0,0,0.25);
-        box-shadow: 0 0 $shadow_empty calc($shadow_empty * $shadow_density);
+        color: rgba(0,0,0, 0.55);
+        box-shadow: 0 0 calc($shadow_empty * 150) calc(($shadow_empty * 150) * $shadow_density);
         transform: translate(-50%, -50%);
-        animation: movement $duration ease-in-out infinite forwards alternate;
+        animation: movement_#{$index} $duration ease-in-out infinite forwards alternate;
+        animation-delay: $delay;
         pointer-events: none;
         user-select: none;
       }
     }
 
-    @for $particle from 1 to 100 {
-      @include particle("purple", $particle);
+    @for $particle from 1 through 30 {
+      $color_index: math.random(7) + 1;
+
+      @if($color_index == 1){
+        @include particle("white", $particle);
+      }
+
+      @if($color_index <= 3 and $color_index > 1){
+        @include particle("purple", $particle);
+      }
+
+      @if($color_index <= 7 and $color_index > 3){
+        @include particle("blue", $particle);
+      }
     }
   }
 }

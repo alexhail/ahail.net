@@ -4,10 +4,10 @@
 @import "view/component/background";
 @import "view/component/navigation";
 @import "view/component/button";
+@import "view/component/title";
 @import "view/page/resume";
 @import "view/page/portfolio";
 @import "view/page/home";
-@import "../Roboto/roboto";
 @import "./normalize.css";
 @import "./inline.scss";
 
@@ -27,7 +27,7 @@ html {
     display: block;
     height: 100%;
     font-family: var(--font-family);
-    font-weight: 500;
+    font-weight: normal;
     -webkit-font-smoothing: "antialiased";
     -moz-osx-font-smoothing: "grayscale";
 
