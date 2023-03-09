@@ -1,5 +1,5 @@
 <template>
-  <div id="music" view="music">
+  <div id="view" view="music">
     <Navigation />
   </div>
 </template>
