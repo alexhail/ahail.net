@@ -2,6 +2,12 @@
   max-height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden;
+
+  text-align: center;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  color: #7d7d7d;
+  letter-spacing: 2px;
   
   &[theme*="dark"]{
     .index-title-container {

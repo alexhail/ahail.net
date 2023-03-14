@@ -40,9 +40,9 @@ html {
       #view[view] {
         padding: 30px;
         position: relative;
-        min-height: 100vh;
         z-index: 1;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
 
         p {
           font-weight: 400;

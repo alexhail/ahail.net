@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, type NavigationGuardNext, type RouteLocationNormalized } from 'vue-router'
-import DiscographyView from './views/DiscographyView.vue'
 import HomeView from './views/HomeView.vue'
 import PortfolioView from './views/PortfolioView.vue'
 import ProgrammingView from './views/ProgrammingView.vue'
@@ -37,12 +36,6 @@ const routes = [
     path: '/music', name: 'music', component: MusicView,
     meta: {
       title: `${title_prefix} | Music`
-    }
-  },
-  {
-    path: '/music/discography', name: 'discography', component: DiscographyView,
-    meta: {
-      title: `${title_prefix} | Music | Discography`
     }
   }
 ]

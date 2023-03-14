@@ -35,7 +35,7 @@
       </template>
     </template>
   </nav>
-  <nav v-else>
+  <nav v-if="route != 'home' && hasBranches(route)">
     <template v-for="branch in routeTree['home']">
       <template v-for="(veins, leaf) in branch">
         <template v-if="route == leaf">
@@ -44,31 +44,62 @@
       </template>
     </template>
   </nav>
+  <p v-if="route != 'home'" class="router-back"><RouterLink :to="{ name: 'home' }">&larr; Back</RouterLink></p>
 </template>
 
 <script lang="ts">
 import { capitalize } from '../helper'
 import { useRouter } from 'vue-router'
 import { computed, ref, watch } from 'vue'
+import { isArray } from '@vue/shared'
 
 export default {
   setup() {
     const router = useRouter()
-    const routeTree = {
-      "home": [
+    const routeTree= {
+      home: [
         {
           code: ['resume', 'portfolio'],
         },
         {
-          music: ['discography']
+          music: []
         }
       ]
     }
+
+    interface Grove {
+      code?: Array<any>;
+      music?: Array<any>;
+    }
+
+    function hasBranches(tree: string) {
+      if(tree == 'home') return true
+
+      for(const grove of routeTree.home) {
+        for(const trunk in grove) {
+          const routes = (<Grove> grove)[trunk as keyof Grove]
+          
+          if(typeof routes !== "undefined") {
+            for(const route of routes){
+              if(tree == route) {
+                if(typeof route === 'string' || route instanceof String)
+                  return false
+                
+                return true
+              }
+            }
+          }
+        }
+      }
+         
+      return true
+    }
   
     return {
-      route: computed(() => router.currentRoute.value.name),
+      route: <any> computed(() => router.currentRoute.value.name),
       routeTree,
-      capitalize
+      capitalize,
+      hasBranches
     }
   }
 }
